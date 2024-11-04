@@ -187,13 +187,13 @@
             <div><p class="font-semibold">死球</p><p><%= @player.batting_stat.hit_by_pitch %></p></div>
             <div><p class="font-semibold">三振</p><p><%= @player.batting_stat.strikeouts %></p></div>
             <div><p class="font-semibold">併殺</p><p><%= @player.batting_stat.gidp %></p></div>
-            <div><p class="font-semibold">打率</p><p><%= @player.batting_stat.avg %></p></div>
-            <div><p class="font-semibold">長打率</p><p><%= @player.batting_stat.slg %></p></div>
-            <div><p class="font-semibold">出塁率</p><p><%= @player.batting_stat.obp %></p></div>
-            <div><p class="font-semibold">OPS</p><p><%= @player.batting_stat.ops %></p></div>
+            <div><p class="font-semibold">打率</p><p><%= number_with_precision(@player.batting_stat.avg, precision: 3).sub(/^0/, '') %></p></div>
+            <div><p class="font-semibold">長打率</p><p><%= number_with_precision(@player.batting_stat.slg, precision: 3).sub(/^0/, '') %></p></div>
+            <div><p class="font-semibold">出塁率</p><p><%= number_with_precision(@player.batting_stat.obp, precision: 3).sub(/^0/, '') %></p></div>
+            <div><p class="font-semibold">OPS</p><p><%= number_with_precision(@player.batting_stat.ops, precision: 3).sub(/^0/, '') %></p></div>
             <div><p class="font-semibold">K%</p><p><%= number_to_percentage(@player.batting_stat.k_percentage * 100, precision: 1) %></p></div>
             <div><p class="font-semibold">BB%</p><p><%= number_to_percentage(@player.batting_stat.bb_percentage * 100, precision: 1) %></p></div>
-            <div><p class="font-semibold">BB/K</p><p><%= number_with_precision(@player.batting_stat.bb_k, precision: 2) %></p></div>
+            <div><p class="font-semibold">BB/K</p><p><%= number_with_precision(@player.batting_stat.bb_k, precision: 2, strip_insignificant_zeros: true) %></p></div>
             <!-- 他の成績項目も追加 -->
           </div>
         <% end %>
