@@ -1,0 +1,32 @@
+<div class="bg-gradient-to-r from-purple-300 via-pink-300 to-yellow-200 min-h-screen flex flex-col items-center py-10">
+  <!-- ページタイトル -->
+  <h1 class="text-5xl font-extrabold text-purple-800 mb-8">NPB成績データベース</h1>
+
+  <!-- サブタイトル -->
+  <p class="text-lg text-pink-600 mb-8 font-semibold">気になる選手の2024年度成績を調べよう！</p>
+
+  <!-- 検索フォーム -->
+  <%= form_with url: players_path, method: :get, class: "w-3/4 max-w-md mb-8" do %>
+    <div class="flex shadow-xl rounded-full overflow-hidden border-4 border-blue-400">
+      <input type="text" name="query" placeholder="選手名を入力 (例: 山田太郎)" class="flex-grow py-3 px-4 text-gray-700 focus:outline-none" />
+      <button type="submit" class="bg-blue-500 text-white font-bold py-3 px-6 hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105">検索</button>
+    </div>
+  <% end %>
+
+  <!-- 選手が見つからなかった場合のメッセージ -->
+  <% if flash[:alert] %>
+    <div class="bg-red-100 border border-red-500 text-red-700 px-4 py-3 rounded-full mb-8 max-w-md text-center shadow-lg">
+      <p><%= flash[:alert] %></p>
+    </div>
+  <% end %>
+
+  <!-- ダミーイメージ/野球アイコン -->
+  <div class="flex justify-center mt-4 space-x-4">
+    <%= image_tag "baseball-icon2.jpeg", alt: "Baseball Icon 2", width: 200 %>
+  </div>
+
+  <!-- フッター -->
+  <footer class="mt-12 text-sm text-gray-600 font-light">
+    本サイトで提供されるデータはNPB公式サイトより取得したもの及び算出したものです。
+  </footer>
+</div>

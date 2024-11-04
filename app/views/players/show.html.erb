@@ -1,0 +1,202 @@
+<div class="bg-gradient-to-br from-yellow-100 via-pink-100 to-blue-100 min-h-screen py-3 px-8">
+  <!-- 戻るボタン -->
+  <div class="mb-4">
+    <a href="/" class="text-blue-600 hover:underline text-sm font-semibold">&larr; ホームに戻る</a>
+  </div>
+
+  <!-- 選手情報カード -->
+  <div class="max-w-5xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
+    <div class="flex items-center p-6 bg-gradient-to-r from-purple-600 via-red-400 to-orange-400 text-white">
+      <!-- 選手画像 -->
+      <img src="<%= @player.photo_url %>" alt="<%= @player.name %>" class="w-32 rounded-full mr-6 shadow-md border-4 border-white object-cover">
+      <div>
+        <!-- 名前と基本情報 -->
+        <h2 class="text-4xl font-bold"><%= @player.name %></h2>
+        <p class="text-xl text-yellow-100"><%= @player.kana %></p>
+        <p class="text-md mt-1">チーム: <span class="font-semibold"><%= @player.team %></span></p>
+        <p class="text-md">背番号: <span class="font-semibold"><%= @player.number %></span></p>
+      </div>
+    </div>
+
+    <div class="p-8 bg-gradient-to-br from-white to-gray-50">
+      <!-- 基本情報 -->
+      <div class="grid grid-cols-2 gap-6 text-gray-800 px-6 mb-8 text-lg">
+        <div>
+          <h3 class="text-blue-600 font-semibold">ポジション</h3>
+          <p><%= @player.position %></p>
+        </div>
+        <div>
+          <h3 class="text-blue-600 font-semibold">利き手</h3>
+          <p><%= @player.throws_bats %></p>
+        </div>
+        <div>
+          <h3 class="text-blue-600 font-semibold">身長 / 体重</h3>
+          <p><%= @player.height_weight %></p>
+        </div>
+        <div>
+          <h3 class="text-blue-600 font-semibold">生年月日</h3>
+          <p><%= @player.birthdate %></p>
+        </div>
+        <div>
+          <h3 class="text-blue-600 font-semibold">経歴</h3>
+          <p><%= @player.career %></p>
+        </div>
+        <div>
+          <h3 class="text-blue-600 font-semibold">ドラフト</h3>
+          <p><%= @player.draft %></p>
+        </div>
+      </div>
+
+      <!-- 成績情報 -->
+      <div class="mt-4">
+        <% if @player.position == "投手" %>
+          <div class="bg-indigo-200 text-left text-indigo-800 text-base sm:text-lg md:text-xl p-4 rounded-t-lg">
+            <h3 class="font-semibold px-6 text-xl">2024年度 成績</h3>
+          </div>
+          
+          <!-- 成績情報のグリッドレイアウト -->
+          <div class="bg-white grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4 text-gray-800 text-xl sm:text-base md:text-lg rounded-b-lg shadow-lg px-6">
+            <div>
+              <p class="font-semibold">試合</p>
+              <p><%= @player.pitching_stat.games %></p>
+            </div>
+            <div>
+              <p class="font-semibold">勝利</p>
+              <p><%= @player.pitching_stat.wins %></p>
+            </div>
+            <div>
+              <p class="font-semibold">敗戦</p>
+              <p><%= @player.pitching_stat.losses %></p>
+            </div>
+            <div>
+              <p class="font-semibold">セーブ</p>
+              <p><%= @player.pitching_stat.saves %></p>
+            </div>
+            <div>
+              <p class="font-semibold">ホールド</p>
+              <p><%= @player.pitching_stat.holds %></p>
+            </div>
+            <div>
+              <p class="font-semibold">HP</p>
+              <p><%= @player.pitching_stat.hold_points %></p>
+            </div>
+            <div>
+              <p class="font-semibold">完投</p>
+              <p><%= @player.pitching_stat.complete_games %></p>
+            </div>
+            <div>
+              <p class="font-semibold">完封</p>
+              <p><%= @player.pitching_stat.shutouts %></p>
+            </div>
+            <div>
+              <p class="font-semibold">無四球</p>
+              <p><%= @player.pitching_stat.no_walks %></p>
+            </div>
+            <div>
+              <p class="font-semibold">勝率</p>
+              <p><%= number_with_precision(@player.pitching_stat.win_percentage, precision: 3) %></p>
+            </div>
+            <div>
+              <p class="font-semibold">打者</p>
+              <p><%= @player.pitching_stat.batters_faced %></p>
+            </div>
+            <div>
+              <p class="font-semibold">投球回</p>
+              <p><%= number_with_precision(@player.pitching_stat.innings, precision: 1) %></p>
+            </div>
+            <div>
+              <p class="font-semibold">被安打</p>
+              <p><%= @player.pitching_stat.hits %></p>
+            </div>
+            <div>
+              <p class="font-semibold">被本塁打</p>
+              <p><%= @player.pitching_stat.home_runs %></p>
+            </div>
+            <div>
+              <p class="font-semibold">与四球</p>
+              <p><%= @player.pitching_stat.walks %></p>
+            </div>
+            <div>
+              <p class="font-semibold">与死球</p>
+              <p><%= @player.pitching_stat.hit_by_pitch %></p>
+            </div>
+            <div>
+              <p class="font-semibold">奪三振</p>
+              <p><%= @player.pitching_stat.strikeouts %></p>
+            </div>
+            <div>
+              <p class="font-semibold">暴投</p>
+              <p><%= @player.pitching_stat.wild_pitches %></p>
+            </div>
+            <div>
+              <p class="font-semibold">ボーク</p>
+              <p><%= @player.pitching_stat.balks %></p>
+            </div>
+            <div>
+              <p class="font-semibold">失点</p>
+              <p><%= @player.pitching_stat.runs %></p>
+            </div>
+            <div>
+              <p class="font-semibold">自責点</p>
+              <p><%= @player.pitching_stat.earned_runs %></p>
+            </div>
+            <div>
+              <p class="font-semibold">防御率</p>
+              <p><%= number_with_precision(@player.pitching_stat.era, precision: 2) %></p>
+            </div>
+            <div>
+              <p class="font-semibold">WHIP</p>
+              <p><%= number_with_precision(@player.pitching_stat.whip, precision: 2) %></p>
+            </div>
+            <div>
+              <p class="font-semibold">K/9</p>
+              <p><%= number_with_precision(@player.pitching_stat.k_per_nine, precision: 2) %></p>
+            </div>
+            <div>
+              <p class="font-semibold">BB/9</p>
+              <p><%= number_with_precision(@player.pitching_stat.bb_per_nine, precision: 2) %></p>
+            </div>
+            <div>
+              <p class="font-semibold">K/BB</p>
+              <p><%= number_with_precision(@player.pitching_stat.k_bb, precision: 2) %></p>
+            </div>
+          </div>
+        <% else %>
+          <div class="bg-green-200 text-left text-green-800 text-base sm:text-lg md:text-xl p-4 rounded-t-lg">
+            <h3 class="font-semibold px-6 text-xl">2024年度 野手成績</h3>
+          </div>
+          
+          <!-- 野手成績情報のグリッドレイアウト -->
+          <div class="bg-white grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4 text-gray-800 text-xl sm:text-base md:text-lg rounded-b-lg shadow-lg px-6">
+            <!-- 野手成績の各項目 -->
+            <div><p class="font-semibold">試合</p><p><%= @player.batting_stat.games %></p></div>
+            <div><p class="font-semibold">打席</p><p><%= @player.batting_stat.plate_appearances %></p></div>
+            <div><p class="font-semibold">打数</p><p><%= @player.batting_stat.at_bats %></p></div>
+            <div><p class="font-semibold">得点</p><p><%= @player.batting_stat.runs %></p></div>
+            <div><p class="font-semibold">安打</p><p><%= @player.batting_stat.hits %></p></div>
+            <div><p class="font-semibold">二塁打</p><p><%= @player.batting_stat.doubles %></p></div>
+            <div><p class="font-semibold">三塁打</p><p><%= @player.batting_stat.triples %></p></div>
+            <div><p class="font-semibold">本塁打</p><p><%= @player.batting_stat.home_runs %></p></div>
+            <div><p class="font-semibold">塁打</p><p><%= @player.batting_stat.total_bases %></p></div>
+            <div><p class="font-semibold">打点</p><p><%= @player.batting_stat.rbi %></p></div>
+            <div><p class="font-semibold">盗塁</p><p><%= @player.batting_stat.stolen_bases %></p></div>
+            <div><p class="font-semibold">盗塁死</p><p><%= @player.batting_stat.caught_stealing %></p></div>
+            <div><p class="font-semibold">犠打</p><p><%= @player.batting_stat.sacrifice_bunts %></p></div>
+            <div><p class="font-semibold">犠飛</p><p><%= @player.batting_stat.sacrifice_flies %></p></div>
+            <div><p class="font-semibold">四球</p><p><%= @player.batting_stat.walks %></p></div>
+            <div><p class="font-semibold">死球</p><p><%= @player.batting_stat.hit_by_pitch %></p></div>
+            <div><p class="font-semibold">三振</p><p><%= @player.batting_stat.strikeouts %></p></div>
+            <div><p class="font-semibold">併殺</p><p><%= @player.batting_stat.gidp %></p></div>
+            <div><p class="font-semibold">打率</p><p><%= @player.batting_stat.avg %></p></div>
+            <div><p class="font-semibold">長打率</p><p><%= @player.batting_stat.slg %></p></div>
+            <div><p class="font-semibold">出塁率</p><p><%= @player.batting_stat.obp %></p></div>
+            <div><p class="font-semibold">OPS</p><p><%= @player.batting_stat.ops %></p></div>
+            <div><p class="font-semibold">K%</p><p><%= number_to_percentage(@player.batting_stat.k_percentage * 100, precision: 1) %></p></div>
+            <div><p class="font-semibold">BB%</p><p><%= number_to_percentage(@player.batting_stat.bb_percentage * 100, precision: 1) %></p></div>
+            <div><p class="font-semibold">BB/K</p><p><%= number_with_precision(@player.batting_stat.bb_k, precision: 2) %></p></div>
+            <!-- 他の成績項目も追加 -->
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
